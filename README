@@ -1,7 +1,0 @@
-Получаем позиции сайта в поисковиках.
-
-Например:
-
-seot = Seotracker::Google.new
-seot.get_position('serialmaniak.ru', 'серийный маньяк')
--> 1 
