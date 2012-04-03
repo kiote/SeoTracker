@@ -23,7 +23,9 @@ describe Seotracker do
 
       # мокаем все неважное
       mock = common_mocker
-      mock.expect(:get, mock, [Seotracker::Yandex::SEARCH_URL, {text: @word}])
+      mock.expect(:get, mock, [Seotracker::Yandex::SEARCH_URL  + "text=#{@word}&p=0",  [], nil, {'cookie' => 'hi'}])
+      mock.expect(:get, mock, ['http://kiks.yandex.ru/su/'])
+      mock.expect(:cookies, ['hi'])
       mock.expect(:xpath, [mock], %w\/html/body/div[3]/div/div/div[2]/ol/li/div/h2/a\)
 
       @object.instance_variable_set(:@agent, mock)
@@ -40,7 +42,7 @@ describe Seotracker do
 
       # мокаем все неважное
       mock = common_mocker
-      mock.expect(:get, mock, [Seotracker::Google::SEARCH_URL, {q: @word}])
+      mock.expect(:get, mock, [Seotracker::Google::SEARCH_URL, {q: @word, start: 0}])
       mock.expect(:xpath, [mock], %w\/html/body/div[5]/div/div/div[4]/div[2]/div[2]/div/div[2]/div/ol/li/div/h3/a\)
 
       @object.instance_variable_set(:@agent, mock)
