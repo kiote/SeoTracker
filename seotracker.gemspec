@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "seotracker"
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["krivich ekaterina"]
-  s.date = "2012-04-03"
+  s.date = "2012-04-04"
   s.description = "track sites position in google or yandex by keyword"
   s.email = "kiote_the_one@mail.ru"
   s.extra_rdoc_files = [
