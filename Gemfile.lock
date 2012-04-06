@@ -1,7 +1,6 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    coderay (1.0.5)
     domain_name (0.5.2)
       unf (~> 0.0.3)
     git (1.2.5)
@@ -19,21 +18,15 @@ GEM
       nokogiri (~> 1.4)
       ntlm-http (~> 0.1, >= 0.1.1)
       webrobots (~> 0.0, >= 0.0.9)
-    method_source (0.7.1)
     mime-types (1.18)
     minitest (2.11.4)
     net-http-digest_auth (1.2)
     net-http-persistent (2.6)
     nokogiri (1.5.2)
     ntlm-http (0.1.1)
-    pry (0.9.8.4)
-      coderay (~> 1.0.5)
-      method_source (~> 0.7.1)
-      slop (>= 2.4.4, < 3)
     rake (0.9.2.2)
     rdoc (3.12)
       json (~> 1.4)
-    slop (2.4.4)
     unf (0.0.5)
       unf_ext
     unf_ext (0.0.4)
@@ -46,4 +39,3 @@ DEPENDENCIES
   jeweler
   mechanize
   minitest
-  pry
