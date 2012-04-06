@@ -6,3 +6,5 @@ seot = Seotracker::Google.new
 seot.get_position('serialmaniak.ru', 'серийный маньяк')
 
 -> 1 
+
+Больше информации на странице: http://kiote.github.com/SeoTracker
