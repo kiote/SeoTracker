@@ -46,4 +46,5 @@ class Seotracker
 end
 
 require 'seotracker/yandex'
+require 'seotracker/yandex/direct'
 require 'seotracker/google'

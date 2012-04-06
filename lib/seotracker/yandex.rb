@@ -2,6 +2,8 @@ class Seotracker::Yandex < Seotracker
   SEARCH_URL = 'http://yandex.ru/yandsearch?'
   WORDSTAT_URL = 'http://wordstat.yandex.ru/?cmd=words&page=1&&geo=&text_geo=&text='
 
+  # получаем стастистику wordstat
+  # word - слово, по которому получаем статистику
   def get_wordstat(word)
     url = WORDSTAT_URL + word
     get_cookie if @cookie.nil?

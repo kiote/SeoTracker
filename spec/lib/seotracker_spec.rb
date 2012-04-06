@@ -2,15 +2,23 @@
 $LOAD_PATH << File.expand_path('../../', __FILE__)
 require 'spec_helper'
 
+def yandex_mocker(mock)
+  mock.expect(:get, mock, ['http://kiks.yandex.ru/su/'])
+  mock.expect(:get, mock, [Seotracker::Yandex::SEARCH_URL  + "text=#{@word}&p=0",  [], nil, {'cookie' => 'hi'}])
+  mock.expect(:cookies, ['hi'])
+end
+
+def common_mocker
+  mock = MiniTest::Mock.new
+  mock.expect(:root, mock)
+  mock.expect(:attribute, mock, %w/href/)
+  mock.expect(:value, "http://#{@site}")
+end
+
 describe Seotracker do
   # общие моки, тут от природной лени несколько объектов используют один мок
   # что может несколько напрягать в дальнейшем
-  def common_mocker
-    mock = MiniTest::Mock.new
-    mock.expect(:root, mock)
-    mock.expect(:attribute, mock, %w/href/)
-    mock.expect(:value, "http://#{@site}")
-  end
+
 
   before do
     @site = 'serialmaniak.ru'
@@ -23,9 +31,7 @@ describe Seotracker do
 
       # мокаем все неважное
       mock = common_mocker
-      mock.expect(:get, mock, [Seotracker::Yandex::SEARCH_URL  + "text=#{@word}&p=0",  [], nil, {'cookie' => 'hi'}])
-      mock.expect(:get, mock, ['http://kiks.yandex.ru/su/'])
-      mock.expect(:cookies, ['hi'])
+      yandex_mocker(mock)
       mock.expect(:xpath, [mock], %w\/html/body/div[3]/div/div/div[2]/ol/li/div/h2/a\)
 
       @object.instance_variable_set(:@agent, mock)
@@ -51,5 +57,24 @@ describe Seotracker do
     it 'should return valid position' do
       @object.get_position(@site, @word).must_be :>, 0
     end
+  end
+end
+
+describe Seotracker::Yandex::Direct do
+  before do
+    @client = Seotracker::Yandex::Direct.new
+    @word = 'окна'
+
+    mock =common_mocker
+    yandex_mocker(mock)
+    mock.expect(:xpath, [mock, mock, mock], %w\/html/body/div[3]/div/div/div/div/div[2]/div/h2/a\)
+    mock.expect(:xpath, [mock, mock, mock], %w\/html/body/div[3]/div/div/div/div/div/div/div/div/span\)
+    mock.expect(:content, 'yandex.ru')
+
+    @client.instance_variable_set(:@agent, mock)
+  end
+
+  it 'should get valid special' do
+    @client.special(@word).count.must_equal 3
   end
 end
