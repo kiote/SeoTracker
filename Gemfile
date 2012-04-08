@@ -1,6 +1,11 @@
 source :rubygems
 
-gem 'minitest'
-gem 'mechanize'
-gem 'jeweler'
-#gem 'pry'
+group :runime do
+  gem 'mechanize'
+end
+
+group :development do
+  gem 'minitest'
+  gem 'jeweler'
+  gem 'pry'
+end

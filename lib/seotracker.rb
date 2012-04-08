@@ -20,9 +20,9 @@ class Seotracker
     end
   end
 
-  def get_position(site, word)
+  def get_position(site, word, pages = 200)
     pos, found, start = 0, false, 0
-    while (start < 200) && !found
+    while (start < pages) && !found
       links = parse(word, start)
       start += RESULTS
 
