@@ -1,8 +1,8 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    coderay (1.0.5)
-    domain_name (0.5.2)
+    coderay (1.0.6)
+    domain_name (0.5.3)
       unf (~> 0.0.3)
     git (1.2.5)
     jeweler (1.8.3)
@@ -21,7 +21,7 @@ GEM
       webrobots (~> 0.0, >= 0.0.9)
     method_source (0.7.1)
     mime-types (1.18)
-    minitest (2.11.4)
+    minitest (2.12.1)
     net-http-digest_auth (1.2)
     net-http-persistent (2.6)
     nokogiri (1.5.2)

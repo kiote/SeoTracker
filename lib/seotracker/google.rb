@@ -3,7 +3,7 @@ class Seotracker::Google < Seotracker
 
   protected
 
-  def parse(word, start = 0)
+  def parse(word, start = 0, region = nil)
     page = @agent.get(SEARCH_URL, q: word, start: start)
     page.root.xpath('/html/body/div[5]/div/div/div[4]/div[2]/div[2]/div/div[2]/div/ol/li/div/h3/a')
   end

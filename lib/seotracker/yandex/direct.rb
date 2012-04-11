@@ -1,9 +1,9 @@
 # encoding: utf-8
 
 class Seotracker::Yandex::Direct < Seotracker::Yandex
-  def special(word)
+  def special(word, region = MOSCOW)
     get_cookie
-    url = SEARCH_URL + "text=#{word}&p=0"
+    url = SEARCH_URL + "text=#{word}&p=0&lr=#{region}"
     page = @agent.get(url, [], nil, {'cookie' => @cookie})
     begin
       texts = page.root.xpath('/html/body/div[3]/div/div/div/div/div[2]/div/h2/a')
@@ -21,7 +21,7 @@ class Seotracker::Yandex::Direct < Seotracker::Yandex
 
       result
     rescue Exception => e
-      debug "can't parse yandex direct:" + e.message
+      debug "can't parse yandex direct: #{e.message}"
       'error'
     end
   end

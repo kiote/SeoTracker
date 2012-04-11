@@ -4,7 +4,7 @@ require 'spec_helper'
 
 def yandex_mocker(mock)
   mock.expect(:get, mock, ['http://kiks.yandex.ru/su/'])
-  mock.expect(:get, mock, [Seotracker::Yandex::SEARCH_URL  + "text=#{@word}&p=0",  [], nil, {'cookie' => 'hi'}])
+  mock.expect(:get, mock, [Seotracker::Yandex::SEARCH_URL  + "text=#{@word}&p=0&lr=213",  [], nil, {'cookie' => 'hi'}])
   mock.expect(:cookies, ['hi'])
 end
 
@@ -13,6 +13,7 @@ def common_mocker
   mock.expect(:root, mock)
   mock.expect(:attribute, mock, %w/href/)
   mock.expect(:value, "http://#{@site}")
+  mock.expect(:content, 'yandex.ru')
 end
 
 describe Seotracker do
@@ -32,7 +33,7 @@ describe Seotracker do
       # мокаем все неважное
       mock = common_mocker
       yandex_mocker(mock)
-      mock.expect(:xpath, [mock], %w\/html/body/div[3]/div/div/div[2]/ol/li/div/h2/a\)
+      mock.expect(:xpath, [mock], %w\/html/body/div[2]/div/div/div/ol/li/div/div/span/span/a\)
 
       @object.instance_variable_set(:@agent, mock)
     end
@@ -69,7 +70,6 @@ describe Seotracker::Yandex::Direct do
     yandex_mocker(mock)
     mock.expect(:xpath, [mock, mock, mock], %w\/html/body/div[3]/div/div/div/div/div[2]/div/h2/a\)
     mock.expect(:xpath, [mock, mock, mock], %w\/html/body/div[3]/div/div/div/div/div/div/div/div/span\)
-    mock.expect(:content, 'yandex.ru')
 
     @client.instance_variable_set(:@agent, mock)
   end
