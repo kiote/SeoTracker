@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'mechanize'
 require 'logger'
-#require 'pry'
+require 'pry'
 
 class Seotracker
   USER_AGENT = 'Mac Safari'
@@ -21,17 +21,25 @@ class Seotracker
     end
   end
 
+  # получаем позиции
+  # получаем массив ссылок от парсера
+  # увеличиваем счетчик позиций, пока не найдем нужную ссылку
+  # 4 ссылки храним в массиве "последних", чтобы не считать случайно выдранные парсером повторения
   def get_position(site, word, region = Seotracker::Yandex::MOSCOW, pages = 200)
-    pos, found, start = 0, false, 0
+    pos, found, start, hrefs = 0, false, 0, []
     while (start < pages) && !found
       links = parse(word, start, region)
       start += RESULTS
 
       break if links == 'error'
       links.each do |l|
-        href = l.attribute('href').value.downcase
-        # убеждаемся, что это точно ссылка. а то бывает еще адрес
-        pos += 1 if l.content.match(/.+\..+/)
+        href = get_link(l)
+        next if href == '' || hrefs.include?(href)
+
+        # храним 4 последние полученные ссылки
+        hrefs = hrefs.pop(3)
+        hrefs << href
+        pos += 1
         if href.rindex(site) && same_level(href, site)
           found = true
           break
@@ -54,6 +62,12 @@ class Seotracker
     def same_level(href, site)
       return href.count('.') - 1 == site.count('.') if href.index('www')
       href.count('.') == site.count('.')
+    end
+
+    def get_link(link)
+      href = link.attribute('href').value.downcase if link.attribute('href')
+      href ||= link.value.downcase
+      href.match(/[a-zA-Z0-9\-\.]+\.\w*/).to_s
     end
 end
 

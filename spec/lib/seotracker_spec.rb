@@ -6,6 +6,8 @@ def yandex_mocker(mock)
   mock.expect(:get, mock, ['http://kiks.yandex.ru/su/'])
   mock.expect(:get, mock, [Seotracker::Yandex::SEARCH_URL  + "text=#{@word}&p=0&lr=213",  [], nil, {'cookie' => 'hi'}])
   mock.expect(:cookies, ['hi'])
+  mock.expect(:children, mock)
+  mock.expect(:map, mock)
 end
 
 def common_mocker
@@ -33,7 +35,7 @@ describe Seotracker do
       # мокаем все неважное
       mock = common_mocker
       yandex_mocker(mock)
-      mock.expect(:xpath, [mock], %w\/html/body/div[2]/div/div/div/ol/li/div/div/span/span/a\)
+      mock.expect(:xpath, [mock], %w\/html/body/div[2]/div/div/div/ol/li/div/div\)
 
       @object.instance_variable_set(:@agent, mock)
     end

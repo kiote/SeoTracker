@@ -1,6 +1,6 @@
 source :rubygems
 
-group :runime do
+group :runtime do
   gem 'mechanize'
 end
 

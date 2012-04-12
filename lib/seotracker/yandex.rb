@@ -28,8 +28,10 @@ class Seotracker::Yandex < Seotracker
     url = SEARCH_URL + "text=#{word}&p=#{start}&lr=#{region}"
     page = @agent.get(url, [], nil, { 'cookie' => @cookie })
     begin
-      page.root.xpath('/html/body/div[2]/div/div/div/ol/li/div/div/span/span/a')
+      elements = page.root.xpath('/html/body/div[2]/div/div/div/ol/li/div/div')
+      elements.map { |e| e.children.map { |c1|  c1.children.map { |c2| c2.children } } }.flatten.compact.map { |e1| e1.attribute('href') }.flatten.compact
     rescue Exception => e
+      p e.message
       debug "can't parse yandex: #{e.message}"
       'error'
     end
