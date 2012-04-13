@@ -1,4 +1,4 @@
-= SeoTracker - получение позиций сайта в поисковиках.
+= SeoTracker - получение позиций сайта в поисковиках. {<img src="https://secure.travis-ci.org/kiote/SeoTracker.png" />}[http://travis-ci.org/kiote/SeoTracker]
 
 [Например:] 
 seot = Seotracker::Google.new
