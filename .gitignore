@@ -4,7 +4,9 @@ coverage.data
 log.txt
 # rdoc generated
 rdoc
-
+.DS_Store
+seotracker.sublime-project
+seotracker.sublime-workspace
 # yard generated
 doc
 .yardoc
