@@ -25,7 +25,7 @@ class Seotracker
   # получаем массив ссылок от парсера
   # увеличиваем счетчик позиций, пока не найдем нужную ссылку
   # 4 ссылки храним в массиве "последних", чтобы не считать случайно выдранные парсером повторения
-  def get_position(site, word, region = Seotracker::Yandex::MOSCOW, pages = 200)
+  def get_position(site, word, region = nil, pages = 200)
     pos, found, start, hrefs = 0, false, 0, []
     while (start < pages) && !found
       links = parse(word, start, region)
