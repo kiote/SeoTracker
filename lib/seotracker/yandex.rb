@@ -23,6 +23,8 @@ class Seotracker::Yandex < Seotracker
 
   # начинаем парсить с первой страницы, регион по умолчанию - Москва
   def parse(word, start = 0, region = nil)
+    region = MOSCOW if region.nil?
+
     start /= 10
     @cookie || get_cookie
     url = SEARCH_URL + "text=#{word}&p=#{start}&lr=#{region}"
