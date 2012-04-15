@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Seotracker by kiote</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/kiote/SeoTracker">Fork On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/kiote/SeoTracker/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/kiote/SeoTracker/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Seotracker</h1>
+          <p>Получение позиций в поисковиках</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/kiote">kiote</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h3>Seotracker</h3>
+
+<p>Позволяет получать позиции сайта в поисковиках Google и Яндекс</p>
+
+<div class="highlight">
+<pre><span class="no">Gemfile</span><span class="p">:</span>
+<span class="n">gem</span> <span class="s1">'seotracker'</span>
+</pre>
+</div>
+
+
+<p>Получить позиции из Google:</p>
+
+<div class="highlight">
+<pre><span class="n">client</span> <span class="o">=</span> <span class="no">Seotracker</span><span class="o">::</span><span class="no">Google</span><span class="o">.</span><span class="n">new</span>
+<span class="n">client</span><span class="o">.</span><span class="n">get_position</span><span class="p">(</span><span class="s1">'serialmaniak.ru'</span><span class="p">,</span> <span class="s1">'серийный маньяк'</span><span class="p">)</span>
+</pre>
+</div>
+
+
+<p>Получить позиции из Яндекс:</p>
+
+<div class="highlight">
+<pre><span class="n">client</span> <span class="o">=</span> <span class="no">Seotracker</span><span class="o">::</span><span class="no">Yandex</span><span class="o">.</span><span class="n">new</span>
+<span class="n">client</span><span class="o">.</span><span class="n">get_position</span><span class="p">(</span><span class="s1">'serialmaniak.ru'</span><span class="p">,</span> <span class="s1">'серийный маньяк'</span><span class="p">)</span>
+</pre>
+</div>
+
+
+<p>Для Яндекса можно указывать регионы:</p>
+
+<div class="highlight">
+<pre><span class="n">client</span><span class="o">.</span><span class="n">get_position</span><span class="p">(</span><span class="s1">'serialmaniak.ru'</span><span class="p">,</span> <span class="s1">'серийный маньяк'</span><span class="p">,</span> <span class="mi">217</span><span class="p">)</span>
+</pre>
+</div>
+
+
+<p>(полный список регионов тут <a href="http://search.yaca.yandex.ru/geo.c2n">http://search.yaca.yandex.ru/geo.c2n</a>)</p>
+
+<p>Аналогом яндексовых "регионов" в гугле является домен, на который происходит запрос. Соответственно, добавил код для изменения домена, через который происходит запрос.</p>
+
+<p>Пример:</p>
+
+<div class="highlight">
+<pre><span class="n">seot</span> <span class="o">=</span> <span class="no">Seotracker</span><span class="o">::</span><span class="no">Google</span><span class="o">.</span><span class="n">new</span>
+<span class="n">seot</span><span class="o">.</span><span class="n">get_position</span><span class="p">(</span><span class="s1">'dt.ua'</span><span class="p">,</span> <span class="s1">'dt'</span><span class="p">)</span> <span class="c1"># умолчание - российский гугл</span>
+<span class="o">=&gt;</span> <span class="mi">27</span> 
+<span class="n">seot</span><span class="o">.</span><span class="n">get_position</span><span class="p">(</span><span class="s1">'dt.ua'</span><span class="p">,</span> <span class="s1">'dt'</span><span class="p">,</span> <span class="s1">'google.com.ua'</span><span class="p">)</span> <span class="c1"># поиск украинским гуглом</span>
+<span class="o">=&gt;</span> <span class="mi">1</span>
+</pre>
+</div>
+
+
+<p>(Поддержка регионов для гугла добвалена <a href="https://github.com/brain-geek">brain-geek</a>)</p>
+
+<p>Получить wordstat из Яндекс:</p>
+
+<div class="highlight">
+<pre><span class="n">client</span> <span class="o">=</span> <span class="no">Seotracker</span><span class="o">::</span><span class="no">Yandex</span><span class="o">.</span><span class="n">new</span>
+<span class="n">client</span><span class="o">.</span><span class="n">get_wordstat</span><span class="p">(</span><span class="s1">'серийный маньяк'</span><span class="p">)</span>
+</pre>
+</div>
+
+
+<p>Можно указывать регионы:</p>
+
+<div class="highlight">
+<pre><span class="n">client</span><span class="o">.</span><span class="n">get_wordstat</span><span class="p">(</span><span class="s1">'серийный маньяк'</span><span class="p">,</span> <span class="mi">217</span><span class="p">)</span>
+</pre>
+</div>
+
+
+<p>Данные получаются прямым парсингом, используйте на свой страх и риск.</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+    
+  </body>
+</html>
