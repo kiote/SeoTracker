@@ -51,7 +51,7 @@ describe Seotracker do
 
       # мокаем все неважное
       mock = common_mocker
-      mock.expect(:get, mock, [Seotracker::Google.new.send(:search_url), {q: @word, start: 0}])
+      mock.expect(:get, mock, [Seotracker::Google.send(:search_url), {q: @word, start: 0}])
       mock.expect(:xpath, [mock], %w\/html/body/div[5]/div/div/div[4]/div[2]/div[2]/div/div[2]/div/ol/li/div/h3/a\)
 
       @object.instance_variable_set(:@agent, mock)
