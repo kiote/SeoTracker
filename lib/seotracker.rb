@@ -1,7 +1,5 @@
 require 'rubygems'
 require 'mechanize'
-require 'logger'
-require 'pry'
 
 class Seotracker
   USER_AGENT = 'Mac Safari'
@@ -13,7 +11,7 @@ class Seotracker
     @agent.agent.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     @agent.agent.http.retry_change_requests = true
 
-    @debug = true
+    @debug = false
 
     if @debug
       @log = Logger.new('log.txt')
