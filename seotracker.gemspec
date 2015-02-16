@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.authors = ["krivich ekaterina"]
   s.date = "2012-04-12"
   s.description = "track sites position in google or yandex by keyword"
-  s.email = "kiote_the_one@mail.ru"
+  s.email = "krivich.ekaterina@gmail.com"
   s.extra_rdoc_files = [
     "README.rdoc"
   ]
